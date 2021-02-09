@@ -1,0 +1,48 @@
+﻿@model lab6.Models.Room
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Room", method: FormMethod.Post))
+{
+    
+
+    @Html.Label("NrPeople", "NrPeople:")
+    <br />
+    @Html.TextBoxFor(b => b.NrPeople, null, new { placeholder = "Type in the room's number of people", @class = "form-control", @type = "number" })
+    @Html.ValidationMessageFor(b => b.NrPeople, "", new { @class = "text-danger" })
+    <br />
+
+  
+    @Html.Label("Furniture", "Furniture:")
+    <br />
+    @Html.DropDownListFor(b => b.FurnitureId, new SelectList(Model.FurnitureList, "Value", "Text"), "Choose a furniture type", new { @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.FurnitureId, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.Label("Rezervation", "Rezervation:")
+    <br />
+    @Html.DropDownListFor(b => b.RezervationId, new SelectList(Model.RezervationList, "Value", "Text"), "Choose a rezervation", new { @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.RezervationId, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.LabelFor(b => b.UtilitiesList, "Choose utilities:")
+    <br />
+    for (int i = 0; i < Model.UtilitiesList.Count(); i++)
+    {
+        @Html.HiddenFor(b => b.UtilitiesList[i].Id)
+        @Html.HiddenFor(b => b.UtilitiesList[i].Name)
+        @Html.CheckBoxFor(b => b.UtilitiesList[i].Checked)
+        @Html.DisplayFor(b => b.UtilitiesList[i].Name)
+        <br />
+    }
+    @Html.ValidationMessageFor(b => b.UtilitiesList, null, new { @class = "text-danger" })
+
+    <br />
+    <button class="btn btn-primary" type="submit">Create</button>
+}
+

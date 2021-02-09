@@ -1,0 +1,48 @@
+﻿@model lab6.Models.Rezervation
+
+<h2>@Model.Name</h2>
+<table>
+    <tbody>
+        <tr>
+            <td>@Html.LabelFor(p => p.Persone.PhoneNumber, "Phone number:", new { style = "margin-right:10px" })</td>
+            <td>@Html.DisplayFor(p => p.Persone.PhoneNumber)</td>
+        </tr>
+        <tr>
+            <td><label style="margin-right:10px">Birth date:</label></td>
+            <td>@Html.DisplayFor(p => p.Persone.BirthDay).@Html.DisplayFor(p => p.Persone.BirthMonth).@Html.DisplayFor(p => p.Persone.BirthYear)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(p => p.Persone.GenderType, "Gender:", new { style = "margin-right:10px" })</td>
+            <td>@Html.DisplayFor(p => p.Persone.GenderType)</td>
+        </tr>
+        <tr>
+            <td><label style="margin-right:10px">Region:</label></td>
+            <td>@ViewBag.Region</td>
+        </tr>
+        <tr>
+            <td><label style="margin-right:10px">Resident:</label></td>
+            @if (Model.Persone.Resident)
+            {
+                <td>Is Resident</td>
+            }
+            else
+            {
+                <td>Is not a resident</td>
+            }
+
+        </tr>
+    </tbody>
+</table>
+
+<br />
+<br />
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Rezervation", method: FormMethod.Get, routeValues: new { id = Model.RezervationId }))
+{
+    <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Update</button>
+}
+
+@using (Html.BeginForm(actionName: "Delete", controllerName: "Rezervation", method: FormMethod.Post, routeValues: new { id = Model.RezervationId }))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Delete)
+    <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Delete</button>
+}

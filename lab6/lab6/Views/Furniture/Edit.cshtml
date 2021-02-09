@@ -1,0 +1,22 @@
+﻿@model lab6.Models.Furniture
+@{
+    ViewBag.Title = "Update furniture type";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Furniture", method: FormMethod.Post))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.HiddenFor(b => b.FurnitureId)
+
+
+    @Html.LabelFor(bt => bt.TypeFurniture, "Name:")
+    <br />
+    @Html.EditorFor(bt => bt.TypeFurniture, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(bt => bt.TypeFurniture, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    <button class="btn btn-primary" type="submit">Update</button>
+}

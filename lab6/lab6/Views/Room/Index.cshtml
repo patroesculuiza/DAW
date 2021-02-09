@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Rooms";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@foreach (var room in ViewBag.Rooms)
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+
+            @Html.Label("NrPeople", "Number People:")
+            <br />
+            <p>@room.NrPeople</p>
+
+            @using (Html.BeginForm(actionName: "Details", controllerName: "Room", method: FormMethod.Get,
+            routeValues: new { id = room.RoomId }))
+            {
+                <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Details</button>
+            }
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Add room", "New")
+</div>
+
+<div>
+    @Html.ActionLink("Add rezervation details", "New", "Rezervation")
+</div>
+
+<div>
+    @Html.ActionLink("Add furniture type", "New", "Furniture")
+</div>
+
+<div>
+    @Html.ActionLink("Add utility type", "New", "Utility")
+</div>
+

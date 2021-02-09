@@ -1,0 +1,68 @@
+﻿@model lab6.Models.Room
+
+@{ ViewBag.Title = "Details"; }
+
+<h2>@ViewBag.Title</h2>
+
+
+
+@*
+    @Html.Display("Author")
+    @Html.DisplayFor(b => b.Author)*@
+
+@if (Model.Rezervation != null)
+{
+@Html.Label("Rezervation", "Rezervation:")
+                <br />
+                                <p>@Model.Rezervation.Name</p>
+
+                                                @Html.Label("Rezervation", "Person:")
+                                                                <br />
+                                                                                <p>@Model.Rezervation.Persone.PhoneNumber</p>}
+
+
+@if (Model.NrPeople != 0)
+{
+@Html.LabelFor(b => b.NrPeople, "Number of Pages:")
+                <p>@Model.NrPeople</p>}
+
+
+@if (Model.Utilities.Count > 0)
+{
+@Html.Label("Utilities", "Utilities:")
+                <br />
+                                <ul>
+                                    @foreach (var genre in Model.Utilities)
+                                    {
+                    <li>@genre.Name</li>}
+                                </ul>}
+
+@if (Model.Furniture != null)
+{
+@Html.Label("Furniture", "Furniture Type:")
+                <br />
+                                @Html.DisplayFor(b => b.Furniture.TypeFurniture)
+                                                <br />
+                                                                <br />}
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Room", method: FormMethod.Get, routeValues: new { id = Model.RoomId }))
+{
+<button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Update</button>}
+
+@using (Html.BeginForm(actionName: "Delete", controllerName: "Room", method: FormMethod.Post, routeValues: new { id = Model.RoomId }))
+{
+@Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Delete</button>}
+
+@using (Html.BeginForm(actionName: "Index", controllerName: "Furniture", method: FormMethod.Get))
+{
+<button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">See furnitures</button>}
+
+@using (Html.BeginForm(actionName: "Index", controllerName: "Rezervation", method: FormMethod.Get))
+{
+<button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">See rezervations</button>}
+
+
+<br />
+
+

@@ -1,0 +1,18 @@
+﻿@model lab6.Models.Furniture
+@{
+    ViewBag.Title = "Create a furniture type";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Furniture", method: FormMethod.Post))
+{
+    @Html.LabelFor(bt => bt.TypeFurniture, "Name:")
+    <br />
+    @Html.TextBoxFor(bt => bt.TypeFurniture, null, new { placeholder = "Type in the furniture type's name", @class = "form-control" })
+    @Html.ValidationMessageFor(bt => bt.TypeFurniture, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    <button class="btn btn-primary" type="submit">Create</button>
+}

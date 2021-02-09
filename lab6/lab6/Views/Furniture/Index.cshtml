@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Furniture";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <thead>
+    <th>Name</th>
+    <th>Update/Remove</th>
+    </thead>
+    <tbody>
+        @foreach (var furniture in ViewBag.Furnitures)
+        {
+            <tr>
+                <td>@furniture.TypeFurniture</td>
+                <td>
+                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Furniture", method: FormMethod.Get,
+                        routeValues: new { id = furniture.FurnitureId }))
+                    {
+                        <button type="submit" class="btn btn-link col-lg-3">Update</button>
+                    }
+
+                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Furniture", method: FormMethod.Post,
+                        routeValues: new { id = furniture.FurnitureId }))
+                    {
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button type="submit" class="btn btn-link col-lg-3">Remove</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+@using (Html.BeginForm(actionName: "Index", controllerName: "Room", method: FormMethod.Get))
+{
+<button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Back to rooms</button>}
+
+@Html.ActionLink("Add furniture type", "New")
